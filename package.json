@@ -7,7 +7,8 @@
     "lint": "vue-cli-service lint --max-warnings 10",
     "build:esm": "rollup --config build/rollup.esm.config.js",
     "build:umd": "rollup --config build/rollup.umd.config.js",
-    "clean": "rimraf ./dist"
+    "clean": "rimraf ./dist",
+    "prepublishOnly": "npm run lint && npm run build"
   },
   "dependencies": {
     "@tbmp/mp-cloud-sdk": "^1.4.2",
@@ -26,6 +27,11 @@
     "rollup": "^2.38.5",
     "rollup-plugin-typescript2": "^0.29.0",
     "typescript": "^4.3.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm run test"
+    }
   },
   "main": "dist/yjf-ita.umd.js",
   "module": "dist/yjf-ita.esm.js",
