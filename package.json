@@ -4,11 +4,10 @@
   "private": false,
   "scripts": {
     "build": "npm run clean && npm run build:esm && npm run build:umd",
-    "lint": "vue-cli-service lint --max-warnings 10",
     "build:esm": "rollup --config build/rollup.esm.config.js",
     "build:umd": "rollup --config build/rollup.umd.config.js",
     "clean": "rimraf ./dist",
-    "prepublishOnly": "npm run lint && npm run build"
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@tbmp/mp-cloud-sdk": "^1.4.2",
@@ -30,7 +29,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint && npm run test"
+      "pre-commit": " npm run test"
     }
   },
   "main": "dist/yjf-ita.umd.js",
