@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "private": false,
   "scripts": {
-    "build": "npm run build:esm && npm run build:umd",
+    "build": "npm run clean && npm run build:esm && npm run build:umd",
     "build:esm": "rollup --config build/rollup.esm.config.js",
     "build:umd": "rollup --config build/rollup.umd.config.js",
     "clean": "rimraf ./dist",
@@ -29,7 +29,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": " npm run test"
+      "pre-commit": "npm run test"
     }
   },
   "main": "dist/yjf-ita.umd.js",
