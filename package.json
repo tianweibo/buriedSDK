@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "private": false,
   "scripts": {
-    "build": "npm run clean && npm run build:esm && npm run build:umd",
+    "build": "npm run build:esm && npm run build:umd",
     "build:esm": "rollup --config build/rollup.esm.config.js",
     "build:umd": "rollup --config build/rollup.umd.config.js",
     "clean": "rimraf ./dist",
