@@ -30,4 +30,4 @@ jobs:
          registry-url: https://registry.npmjs.com/
      - run: npm publish --access public
        env:
-         NODE_AUTH_TOKEN: ${{secrets.sdk_buried}}
+         NODE_AUTH_TOKEN: ${{secrets.sdk-buried}}
