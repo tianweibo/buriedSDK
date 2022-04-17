@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+      "target": "esnext",
+      "module": "ESNext",
+      "strict": true,
+      "jsx": "preserve",
+      "importHelpers": true,
+      "moduleResolution": "node",
+      "skipLibCheck": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "sourceMap": true,
+      "baseUrl": ".",
+      "types": [
+       
+        
+      ],
+      "paths": {
+        "@/*": [
+          "src/*"
+        ]
+      },
+      
+    },
+    "include": ["src/**/*", "src/typings"],
+    "exclude": [
+      "node_modules"
+    ]
+  }
+  
