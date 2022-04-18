@@ -70,7 +70,7 @@ const keys = [
     'is_interactive',
     'url',
 
-    // 应用
+    // 应用1
     'platform_system',
     'platform_app',
     'platform_app_code',
