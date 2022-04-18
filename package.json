@@ -6,6 +6,7 @@
     "build": "npm run clean && npm run build:esm && npm run build:umd",
     "build:esm": "rollup --config build/rollup.esm.config.js",
     "build:umd": "rollup --config build/rollup.umd.config.js",
+    "test": "vue-cli-service test:unit",
     "clean": "rimraf ./dist",
     "prepublishOnly": "npm run build"
   },
@@ -27,7 +28,11 @@
     "rollup-plugin-typescript2": "^0.29.0",
     "typescript": "^4.3.5"
   },
-  
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test"
+    }
+  },
   "main": "dist/yjf-ita.umd.js",
   "module": "dist/yjf-ita.esm.js",
   "files": [
