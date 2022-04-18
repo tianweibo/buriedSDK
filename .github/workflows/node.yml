@@ -15,9 +15,8 @@ jobs:
     - uses: actions/setup-node@v2
       with:
         node-version: 14
-    - run: npm -v
     - run: npm install
-    - run: node -v
+    - run: node fund
     - run: npm run build
 
  publish-npm:

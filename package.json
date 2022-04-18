@@ -6,7 +6,7 @@
     "build": "npm run clean && npm run build:esm && npm run build:umd",
     "build:esm": "rollup --config build/rollup.esm.config.js",
     "build:umd": "rollup --config build/rollup.umd.config.js",
-    "test": "vue-cli-service test:unit",
+    "test": "",
     "clean": "rimraf ./dist",
     "prepublishOnly": "npm run build"
   },
