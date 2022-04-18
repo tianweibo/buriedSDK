@@ -1,6 +1,7 @@
 
 import json from '@rollup/plugin-json'
 import commonjs from '@rollup/plugin-commonjs'
+//import babel from 'rollup-plugin-babel';
 import typescript from 'rollup-plugin-typescript2'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import { name } from '../package.json'
@@ -18,10 +19,15 @@ export default {
     format: 'es'
   },
   plugins: [
-    nodeResolve(),
+    nodeResolve({
+        browser: true,
+    }),
     typescript({ tsconfigOverride: overrides }), //可以修改tsconfig.jsin 中的配置
     json(),
-    commonjs()
+    commonjs(),
+    /* babel({
+        exclude: "node_modules/**"
+    }) */
   ],
   //external: ['vue', 'lodash-es'] //vue会在依赖的项目提供，lodash-es在代码运行时会被安装，所以在生产组件时，不需要打包这个两个文件。
 }

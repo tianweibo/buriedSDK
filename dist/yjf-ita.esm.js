@@ -1,9 +1,27 @@
-import require$$1 from 'http';
-import require$$2 from 'https';
-import require$$0$2 from 'url';
-import require$$3 from 'stream';
-import require$$4 from 'assert';
-import require$$8 from 'zlib';
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+
+function __awaiter(thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+}
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -11,7 +29,7 @@ function getDefaultExportFromCjs (x) {
 	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
 }
 
-var axios$2 = {exports: {}};
+var axios$1 = {exports: {}};
 
 var bind$2 = function bind(fn, thisArg) {
   return function wrap() {
@@ -346,7 +364,7 @@ function stripBOM(content) {
   return content;
 }
 
-var utils$e = {
+var utils$d = {
   isArray: isArray,
   isArrayBuffer: isArrayBuffer,
   isBuffer: isBuffer,
@@ -371,7 +389,7 @@ var utils$e = {
   stripBOM: stripBOM
 };
 
-var utils$d = utils$e;
+var utils$c = utils$d;
 
 function encode(val) {
   return encodeURIComponent(val).
@@ -390,7 +408,7 @@ function encode(val) {
  * @param {object} [params] The params to be appended
  * @returns {string} The formatted url
  */
-var buildURL$3 = function buildURL(url, params, paramsSerializer) {
+var buildURL$2 = function buildURL(url, params, paramsSerializer) {
   /*eslint no-param-reassign:0*/
   if (!params) {
     return url;
@@ -399,26 +417,26 @@ var buildURL$3 = function buildURL(url, params, paramsSerializer) {
   var serializedParams;
   if (paramsSerializer) {
     serializedParams = paramsSerializer(params);
-  } else if (utils$d.isURLSearchParams(params)) {
+  } else if (utils$c.isURLSearchParams(params)) {
     serializedParams = params.toString();
   } else {
     var parts = [];
 
-    utils$d.forEach(params, function serialize(val, key) {
+    utils$c.forEach(params, function serialize(val, key) {
       if (val === null || typeof val === 'undefined') {
         return;
       }
 
-      if (utils$d.isArray(val)) {
+      if (utils$c.isArray(val)) {
         key = key + '[]';
       } else {
         val = [val];
       }
 
-      utils$d.forEach(val, function parseValue(v) {
-        if (utils$d.isDate(v)) {
+      utils$c.forEach(val, function parseValue(v) {
+        if (utils$c.isDate(v)) {
           v = v.toISOString();
-        } else if (utils$d.isObject(v)) {
+        } else if (utils$c.isObject(v)) {
           v = JSON.stringify(v);
         }
         parts.push(encode(key) + '=' + encode(v));
@@ -440,7 +458,7 @@ var buildURL$3 = function buildURL(url, params, paramsSerializer) {
   return url;
 };
 
-var utils$c = utils$e;
+var utils$b = utils$d;
 
 function InterceptorManager$1() {
   this.handlers = [];
@@ -484,7 +502,7 @@ InterceptorManager$1.prototype.eject = function eject(id) {
  * @param {Function} fn The function to call for each interceptor
  */
 InterceptorManager$1.prototype.forEach = function forEach(fn) {
-  utils$c.forEach(this.handlers, function forEachHandler(h) {
+  utils$b.forEach(this.handlers, function forEachHandler(h) {
     if (h !== null) {
       fn(h);
     }
@@ -493,10 +511,10 @@ InterceptorManager$1.prototype.forEach = function forEach(fn) {
 
 var InterceptorManager_1 = InterceptorManager$1;
 
-var utils$b = utils$e;
+var utils$a = utils$d;
 
 var normalizeHeaderName$1 = function normalizeHeaderName(headers, normalizedName) {
-  utils$b.forEach(headers, function processHeader(value, name) {
+  utils$a.forEach(headers, function processHeader(value, name) {
     if (name !== normalizedName && name.toUpperCase() === normalizedName.toUpperCase()) {
       headers[normalizedName] = value;
       delete headers[name];
@@ -514,7 +532,7 @@ var normalizeHeaderName$1 = function normalizeHeaderName(headers, normalizedName
  * @param {Object} [response] The response.
  * @returns {Error} The error.
  */
-var enhanceError$3 = function enhanceError(error, config, code, request, response) {
+var enhanceError$2 = function enhanceError(error, config, code, request, response) {
   error.config = config;
   if (code) {
     error.code = code;
@@ -545,7 +563,7 @@ var enhanceError$3 = function enhanceError(error, config, code, request, respons
   return error;
 };
 
-var enhanceError$2 = enhanceError$3;
+var enhanceError$1 = enhanceError$2;
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -557,12 +575,12 @@ var enhanceError$2 = enhanceError$3;
  * @param {Object} [response] The response.
  * @returns {Error} The created error.
  */
-var createError$3 = function createError(message, config, code, request, response) {
+var createError$2 = function createError(message, config, code, request, response) {
   var error = new Error(message);
-  return enhanceError$2(error, config, code, request, response);
+  return enhanceError$1(error, config, code, request, response);
 };
 
-var createError$2 = createError$3;
+var createError$1 = createError$2;
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -571,12 +589,12 @@ var createError$2 = createError$3;
  * @param {Function} reject A function that rejects the promise.
  * @param {object} response The response.
  */
-var settle$2 = function settle(resolve, reject, response) {
+var settle$1 = function settle(resolve, reject, response) {
   var validateStatus = response.config.validateStatus;
   if (!response.status || !validateStatus || validateStatus(response.status)) {
     resolve(response);
   } else {
-    reject(createError$2(
+    reject(createError$1(
       'Request failed with status code ' + response.status,
       response.config,
       null,
@@ -586,10 +604,10 @@ var settle$2 = function settle(resolve, reject, response) {
   }
 };
 
-var utils$a = utils$e;
+var utils$9 = utils$d;
 
 var cookies$1 = (
-  utils$a.isStandardBrowserEnv() ?
+  utils$9.isStandardBrowserEnv() ?
 
   // Standard browser envs support document.cookie
     (function standardBrowserEnv() {
@@ -598,15 +616,15 @@ var cookies$1 = (
           var cookie = [];
           cookie.push(name + '=' + encodeURIComponent(value));
 
-          if (utils$a.isNumber(expires)) {
+          if (utils$9.isNumber(expires)) {
             cookie.push('expires=' + new Date(expires).toGMTString());
           }
 
-          if (utils$a.isString(path)) {
+          if (utils$9.isString(path)) {
             cookie.push('path=' + path);
           }
 
-          if (utils$a.isString(domain)) {
+          if (utils$9.isString(domain)) {
             cookie.push('domain=' + domain);
           }
 
@@ -676,14 +694,14 @@ var combineURLs = combineURLs$1;
  * @param {string} requestedURL Absolute or relative URL to combine
  * @returns {string} The combined full path
  */
-var buildFullPath$2 = function buildFullPath(baseURL, requestedURL) {
+var buildFullPath$1 = function buildFullPath(baseURL, requestedURL) {
   if (baseURL && !isAbsoluteURL(requestedURL)) {
     return combineURLs(baseURL, requestedURL);
   }
   return requestedURL;
 };
 
-var utils$9 = utils$e;
+var utils$8 = utils$d;
 
 // Headers whose duplicates are ignored by node
 // c.f. https://nodejs.org/api/http.html#http_message_headers
@@ -715,10 +733,10 @@ var parseHeaders$1 = function parseHeaders(headers) {
 
   if (!headers) { return parsed; }
 
-  utils$9.forEach(headers.split('\n'), function parser(line) {
+  utils$8.forEach(headers.split('\n'), function parser(line) {
     i = line.indexOf(':');
-    key = utils$9.trim(line.substr(0, i)).toLowerCase();
-    val = utils$9.trim(line.substr(i + 1));
+    key = utils$8.trim(line.substr(0, i)).toLowerCase();
+    val = utils$8.trim(line.substr(i + 1));
 
     if (key) {
       if (parsed[key] && ignoreDuplicateOf.indexOf(key) >= 0) {
@@ -735,10 +753,10 @@ var parseHeaders$1 = function parseHeaders(headers) {
   return parsed;
 };
 
-var utils$8 = utils$e;
+var utils$7 = utils$d;
 
 var isURLSameOrigin$1 = (
-  utils$8.isStandardBrowserEnv() ?
+  utils$7.isStandardBrowserEnv() ?
 
   // Standard browser envs have full support of the APIs needed to test
   // whether the request URL is of the same origin as current location.
@@ -788,7 +806,7 @@ var isURLSameOrigin$1 = (
     * @returns {boolean} True if URL shares the same origin, otherwise false
     */
       return function isURLSameOrigin(requestURL) {
-        var parsed = (utils$8.isString(requestURL)) ? resolveURL(requestURL) : requestURL;
+        var parsed = (utils$7.isString(requestURL)) ? resolveURL(requestURL) : requestURL;
         return (parsed.protocol === originURL.protocol &&
             parsed.host === originURL.host);
       };
@@ -802,14 +820,14 @@ var isURLSameOrigin$1 = (
     })()
 );
 
-var utils$7 = utils$e;
-var settle$1 = settle$2;
+var utils$6 = utils$d;
+var settle = settle$1;
 var cookies = cookies$1;
-var buildURL$2 = buildURL$3;
-var buildFullPath$1 = buildFullPath$2;
+var buildURL$1 = buildURL$2;
+var buildFullPath = buildFullPath$1;
 var parseHeaders = parseHeaders$1;
 var isURLSameOrigin = isURLSameOrigin$1;
-var createError$1 = createError$3;
+var createError = createError$2;
 
 var xhr = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -817,7 +835,7 @@ var xhr = function xhrAdapter(config) {
     var requestHeaders = config.headers;
     var responseType = config.responseType;
 
-    if (utils$7.isFormData(requestData)) {
+    if (utils$6.isFormData(requestData)) {
       delete requestHeaders['Content-Type']; // Let the browser set it
     }
 
@@ -830,8 +848,8 @@ var xhr = function xhrAdapter(config) {
       requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
     }
 
-    var fullPath = buildFullPath$1(config.baseURL, config.url);
-    request.open(config.method.toUpperCase(), buildURL$2(fullPath, config.params, config.paramsSerializer), true);
+    var fullPath = buildFullPath(config.baseURL, config.url);
+    request.open(config.method.toUpperCase(), buildURL$1(fullPath, config.params, config.paramsSerializer), true);
 
     // Set the request timeout in MS
     request.timeout = config.timeout;
@@ -853,7 +871,7 @@ var xhr = function xhrAdapter(config) {
         request: request
       };
 
-      settle$1(resolve, reject, response);
+      settle(resolve, reject, response);
 
       // Clean up request
       request = null;
@@ -888,7 +906,7 @@ var xhr = function xhrAdapter(config) {
         return;
       }
 
-      reject(createError$1('Request aborted', config, 'ECONNABORTED', request));
+      reject(createError('Request aborted', config, 'ECONNABORTED', request));
 
       // Clean up request
       request = null;
@@ -898,7 +916,7 @@ var xhr = function xhrAdapter(config) {
     request.onerror = function handleError() {
       // Real errors are hidden from us by the browser
       // onerror should only fire if it's a network error
-      reject(createError$1('Network Error', config, null, request));
+      reject(createError('Network Error', config, null, request));
 
       // Clean up request
       request = null;
@@ -910,7 +928,7 @@ var xhr = function xhrAdapter(config) {
       if (config.timeoutErrorMessage) {
         timeoutErrorMessage = config.timeoutErrorMessage;
       }
-      reject(createError$1(
+      reject(createError(
         timeoutErrorMessage,
         config,
         config.transitional && config.transitional.clarifyTimeoutError ? 'ETIMEDOUT' : 'ECONNABORTED',
@@ -923,7 +941,7 @@ var xhr = function xhrAdapter(config) {
     // Add xsrf header
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
-    if (utils$7.isStandardBrowserEnv()) {
+    if (utils$6.isStandardBrowserEnv()) {
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(fullPath)) && config.xsrfCookieName ?
         cookies.read(config.xsrfCookieName) :
@@ -936,7 +954,7 @@ var xhr = function xhrAdapter(config) {
 
     // Add headers to the request
     if ('setRequestHeader' in request) {
-      utils$7.forEach(requestHeaders, function setRequestHeader(val, key) {
+      utils$6.forEach(requestHeaders, function setRequestHeader(val, key) {
         if (typeof requestData === 'undefined' && key.toLowerCase() === 'content-type') {
           // Remove Content-Type if data is undefined
           delete requestHeaders[key];
@@ -948,7 +966,7 @@ var xhr = function xhrAdapter(config) {
     }
 
     // Add withCredentials to request if needed
-    if (!utils$7.isUndefined(config.withCredentials)) {
+    if (!utils$6.isUndefined(config.withCredentials)) {
       request.withCredentials = !!config.withCredentials;
     }
 
@@ -990,1075 +1008,9 @@ var xhr = function xhrAdapter(config) {
   });
 };
 
-var followRedirects = {exports: {}};
-
-var debug$1;
-
-var debug_1 = function () {
-  if (!debug$1) {
-    try {
-      /* eslint global-require: off */
-      debug$1 = require("debug")("follow-redirects");
-    }
-    catch (error) { /* */ }
-    if (typeof debug$1 !== "function") {
-      debug$1 = function () { /* */ };
-    }
-  }
-  debug$1.apply(null, arguments);
-};
-
-var url$1 = require$$0$2;
-var URL = url$1.URL;
-var http$2 = require$$1;
-var https$1 = require$$2;
-var Writable = require$$3.Writable;
-var assert = require$$4;
-var debug = debug_1;
-
-// Create handlers that pass events from native requests
-var events = ["abort", "aborted", "connect", "error", "socket", "timeout"];
-var eventHandlers = Object.create(null);
-events.forEach(function (event) {
-  eventHandlers[event] = function (arg1, arg2, arg3) {
-    this._redirectable.emit(event, arg1, arg2, arg3);
-  };
-});
-
-// Error types with codes
-var RedirectionError = createErrorType(
-  "ERR_FR_REDIRECTION_FAILURE",
-  "Redirected request failed"
-);
-var TooManyRedirectsError = createErrorType(
-  "ERR_FR_TOO_MANY_REDIRECTS",
-  "Maximum number of redirects exceeded"
-);
-var MaxBodyLengthExceededError = createErrorType(
-  "ERR_FR_MAX_BODY_LENGTH_EXCEEDED",
-  "Request body larger than maxBodyLength limit"
-);
-var WriteAfterEndError = createErrorType(
-  "ERR_STREAM_WRITE_AFTER_END",
-  "write after end"
-);
-
-// An HTTP(S) request that can be redirected
-function RedirectableRequest(options, responseCallback) {
-  // Initialize the request
-  Writable.call(this);
-  this._sanitizeOptions(options);
-  this._options = options;
-  this._ended = false;
-  this._ending = false;
-  this._redirectCount = 0;
-  this._redirects = [];
-  this._requestBodyLength = 0;
-  this._requestBodyBuffers = [];
-
-  // Attach a callback if passed
-  if (responseCallback) {
-    this.on("response", responseCallback);
-  }
-
-  // React to responses of native requests
-  var self = this;
-  this._onNativeResponse = function (response) {
-    self._processResponse(response);
-  };
-
-  // Perform the first request
-  this._performRequest();
-}
-RedirectableRequest.prototype = Object.create(Writable.prototype);
-
-RedirectableRequest.prototype.abort = function () {
-  abortRequest(this._currentRequest);
-  this.emit("abort");
-};
-
-// Writes buffered data to the current native request
-RedirectableRequest.prototype.write = function (data, encoding, callback) {
-  // Writing is not allowed if end has been called
-  if (this._ending) {
-    throw new WriteAfterEndError();
-  }
-
-  // Validate input and shift parameters if necessary
-  if (!(typeof data === "string" || typeof data === "object" && ("length" in data))) {
-    throw new TypeError("data should be a string, Buffer or Uint8Array");
-  }
-  if (typeof encoding === "function") {
-    callback = encoding;
-    encoding = null;
-  }
-
-  // Ignore empty buffers, since writing them doesn't invoke the callback
-  // https://github.com/nodejs/node/issues/22066
-  if (data.length === 0) {
-    if (callback) {
-      callback();
-    }
-    return;
-  }
-  // Only write when we don't exceed the maximum body length
-  if (this._requestBodyLength + data.length <= this._options.maxBodyLength) {
-    this._requestBodyLength += data.length;
-    this._requestBodyBuffers.push({ data: data, encoding: encoding });
-    this._currentRequest.write(data, encoding, callback);
-  }
-  // Error when we exceed the maximum body length
-  else {
-    this.emit("error", new MaxBodyLengthExceededError());
-    this.abort();
-  }
-};
-
-// Ends the current native request
-RedirectableRequest.prototype.end = function (data, encoding, callback) {
-  // Shift parameters if necessary
-  if (typeof data === "function") {
-    callback = data;
-    data = encoding = null;
-  }
-  else if (typeof encoding === "function") {
-    callback = encoding;
-    encoding = null;
-  }
-
-  // Write data if needed and end
-  if (!data) {
-    this._ended = this._ending = true;
-    this._currentRequest.end(null, null, callback);
-  }
-  else {
-    var self = this;
-    var currentRequest = this._currentRequest;
-    this.write(data, encoding, function () {
-      self._ended = true;
-      currentRequest.end(null, null, callback);
-    });
-    this._ending = true;
-  }
-};
-
-// Sets a header value on the current native request
-RedirectableRequest.prototype.setHeader = function (name, value) {
-  this._options.headers[name] = value;
-  this._currentRequest.setHeader(name, value);
-};
-
-// Clears a header value on the current native request
-RedirectableRequest.prototype.removeHeader = function (name) {
-  delete this._options.headers[name];
-  this._currentRequest.removeHeader(name);
-};
-
-// Global timeout for all underlying requests
-RedirectableRequest.prototype.setTimeout = function (msecs, callback) {
-  var self = this;
-
-  // Destroys the socket on timeout
-  function destroyOnTimeout(socket) {
-    socket.setTimeout(msecs);
-    socket.removeListener("timeout", socket.destroy);
-    socket.addListener("timeout", socket.destroy);
-  }
-
-  // Sets up a timer to trigger a timeout event
-  function startTimer(socket) {
-    if (self._timeout) {
-      clearTimeout(self._timeout);
-    }
-    self._timeout = setTimeout(function () {
-      self.emit("timeout");
-      clearTimer();
-    }, msecs);
-    destroyOnTimeout(socket);
-  }
-
-  // Stops a timeout from triggering
-  function clearTimer() {
-    // Clear the timeout
-    if (self._timeout) {
-      clearTimeout(self._timeout);
-      self._timeout = null;
-    }
-
-    // Clean up all attached listeners
-    self.removeListener("abort", clearTimer);
-    self.removeListener("error", clearTimer);
-    self.removeListener("response", clearTimer);
-    if (callback) {
-      self.removeListener("timeout", callback);
-    }
-    if (!self.socket) {
-      self._currentRequest.removeListener("socket", startTimer);
-    }
-  }
-
-  // Attach callback if passed
-  if (callback) {
-    this.on("timeout", callback);
-  }
-
-  // Start the timer if or when the socket is opened
-  if (this.socket) {
-    startTimer(this.socket);
-  }
-  else {
-    this._currentRequest.once("socket", startTimer);
-  }
-
-  // Clean up on events
-  this.on("socket", destroyOnTimeout);
-  this.on("abort", clearTimer);
-  this.on("error", clearTimer);
-  this.on("response", clearTimer);
-
-  return this;
-};
-
-// Proxy all other public ClientRequest methods
-[
-  "flushHeaders", "getHeader",
-  "setNoDelay", "setSocketKeepAlive",
-].forEach(function (method) {
-  RedirectableRequest.prototype[method] = function (a, b) {
-    return this._currentRequest[method](a, b);
-  };
-});
-
-// Proxy all public ClientRequest properties
-["aborted", "connection", "socket"].forEach(function (property) {
-  Object.defineProperty(RedirectableRequest.prototype, property, {
-    get: function () { return this._currentRequest[property]; },
-  });
-});
-
-RedirectableRequest.prototype._sanitizeOptions = function (options) {
-  // Ensure headers are always present
-  if (!options.headers) {
-    options.headers = {};
-  }
-
-  // Since http.request treats host as an alias of hostname,
-  // but the url module interprets host as hostname plus port,
-  // eliminate the host property to avoid confusion.
-  if (options.host) {
-    // Use hostname if set, because it has precedence
-    if (!options.hostname) {
-      options.hostname = options.host;
-    }
-    delete options.host;
-  }
-
-  // Complete the URL object when necessary
-  if (!options.pathname && options.path) {
-    var searchPos = options.path.indexOf("?");
-    if (searchPos < 0) {
-      options.pathname = options.path;
-    }
-    else {
-      options.pathname = options.path.substring(0, searchPos);
-      options.search = options.path.substring(searchPos);
-    }
-  }
-};
-
-
-// Executes the next native request (initial or redirect)
-RedirectableRequest.prototype._performRequest = function () {
-  // Load the native protocol
-  var protocol = this._options.protocol;
-  var nativeProtocol = this._options.nativeProtocols[protocol];
-  if (!nativeProtocol) {
-    this.emit("error", new TypeError("Unsupported protocol " + protocol));
-    return;
-  }
-
-  // If specified, use the agent corresponding to the protocol
-  // (HTTP and HTTPS use different types of agents)
-  if (this._options.agents) {
-    var scheme = protocol.substr(0, protocol.length - 1);
-    this._options.agent = this._options.agents[scheme];
-  }
-
-  // Create the native request
-  var request = this._currentRequest =
-        nativeProtocol.request(this._options, this._onNativeResponse);
-  this._currentUrl = url$1.format(this._options);
-
-  // Set up event handlers
-  request._redirectable = this;
-  for (var e = 0; e < events.length; e++) {
-    request.on(events[e], eventHandlers[events[e]]);
-  }
-
-  // End a redirected request
-  // (The first request must be ended explicitly with RedirectableRequest#end)
-  if (this._isRedirect) {
-    // Write the request entity and end.
-    var i = 0;
-    var self = this;
-    var buffers = this._requestBodyBuffers;
-    (function writeNext(error) {
-      // Only write if this request has not been redirected yet
-      /* istanbul ignore else */
-      if (request === self._currentRequest) {
-        // Report any write errors
-        /* istanbul ignore if */
-        if (error) {
-          self.emit("error", error);
-        }
-        // Write the next buffer if there are still left
-        else if (i < buffers.length) {
-          var buffer = buffers[i++];
-          /* istanbul ignore else */
-          if (!request.finished) {
-            request.write(buffer.data, buffer.encoding, writeNext);
-          }
-        }
-        // End the request if `end` has been called on us
-        else if (self._ended) {
-          request.end();
-        }
-      }
-    }());
-  }
-};
-
-// Processes a response from the current native request
-RedirectableRequest.prototype._processResponse = function (response) {
-  // Store the redirected response
-  var statusCode = response.statusCode;
-  if (this._options.trackRedirects) {
-    this._redirects.push({
-      url: this._currentUrl,
-      headers: response.headers,
-      statusCode: statusCode,
-    });
-  }
-
-  // RFC7231§6.4: The 3xx (Redirection) class of status code indicates
-  // that further action needs to be taken by the user agent in order to
-  // fulfill the request. If a Location header field is provided,
-  // the user agent MAY automatically redirect its request to the URI
-  // referenced by the Location field value,
-  // even if the specific status code is not understood.
-
-  // If the response is not a redirect; return it as-is
-  var location = response.headers.location;
-  if (!location || this._options.followRedirects === false ||
-      statusCode < 300 || statusCode >= 400) {
-    response.responseUrl = this._currentUrl;
-    response.redirects = this._redirects;
-    this.emit("response", response);
-
-    // Clean up
-    this._requestBodyBuffers = [];
-    return;
-  }
-
-  // The response is a redirect, so abort the current request
-  abortRequest(this._currentRequest);
-  // Discard the remainder of the response to avoid waiting for data
-  response.destroy();
-
-  // RFC7231§6.4: A client SHOULD detect and intervene
-  // in cyclical redirections (i.e., "infinite" redirection loops).
-  if (++this._redirectCount > this._options.maxRedirects) {
-    this.emit("error", new TooManyRedirectsError());
-    return;
-  }
-
-  // RFC7231§6.4: Automatic redirection needs to done with
-  // care for methods not known to be safe, […]
-  // RFC7231§6.4.2–3: For historical reasons, a user agent MAY change
-  // the request method from POST to GET for the subsequent request.
-  if ((statusCode === 301 || statusCode === 302) && this._options.method === "POST" ||
-      // RFC7231§6.4.4: The 303 (See Other) status code indicates that
-      // the server is redirecting the user agent to a different resource […]
-      // A user agent can perform a retrieval request targeting that URI
-      // (a GET or HEAD request if using HTTP) […]
-      (statusCode === 303) && !/^(?:GET|HEAD)$/.test(this._options.method)) {
-    this._options.method = "GET";
-    // Drop a possible entity and headers related to it
-    this._requestBodyBuffers = [];
-    removeMatchingHeaders(/^content-/i, this._options.headers);
-  }
-
-  // Drop the Host header, as the redirect might lead to a different host
-  var currentHostHeader = removeMatchingHeaders(/^host$/i, this._options.headers);
-
-  // If the redirect is relative, carry over the host of the last request
-  var currentUrlParts = url$1.parse(this._currentUrl);
-  var currentHost = currentHostHeader || currentUrlParts.host;
-  var currentUrl = /^\w+:/.test(location) ? this._currentUrl :
-    url$1.format(Object.assign(currentUrlParts, { host: currentHost }));
-
-  // Determine the URL of the redirection
-  var redirectUrl;
-  try {
-    redirectUrl = url$1.resolve(currentUrl, location);
-  }
-  catch (cause) {
-    this.emit("error", new RedirectionError(cause));
-    return;
-  }
-
-  // Create the redirected request
-  debug("redirecting to", redirectUrl);
-  this._isRedirect = true;
-  var redirectUrlParts = url$1.parse(redirectUrl);
-  Object.assign(this._options, redirectUrlParts);
-
-  // Drop confidential headers when redirecting to a less secure protocol
-  // or to a different domain that is not a superdomain
-  if (redirectUrlParts.protocol !== currentUrlParts.protocol &&
-     redirectUrlParts.protocol !== "https:" ||
-     redirectUrlParts.host !== currentHost &&
-     !isSubdomain(redirectUrlParts.host, currentHost)) {
-    removeMatchingHeaders(/^(?:authorization|cookie)$/i, this._options.headers);
-  }
-
-  // Evaluate the beforeRedirect callback
-  if (typeof this._options.beforeRedirect === "function") {
-    var responseDetails = { headers: response.headers };
-    try {
-      this._options.beforeRedirect.call(null, this._options, responseDetails);
-    }
-    catch (err) {
-      this.emit("error", err);
-      return;
-    }
-    this._sanitizeOptions(this._options);
-  }
-
-  // Perform the redirected request
-  try {
-    this._performRequest();
-  }
-  catch (cause) {
-    this.emit("error", new RedirectionError(cause));
-  }
-};
-
-// Wraps the key/value object of protocols with redirect functionality
-function wrap(protocols) {
-  // Default settings
-  var exports = {
-    maxRedirects: 21,
-    maxBodyLength: 10 * 1024 * 1024,
-  };
-
-  // Wrap each protocol
-  var nativeProtocols = {};
-  Object.keys(protocols).forEach(function (scheme) {
-    var protocol = scheme + ":";
-    var nativeProtocol = nativeProtocols[protocol] = protocols[scheme];
-    var wrappedProtocol = exports[scheme] = Object.create(nativeProtocol);
-
-    // Executes a request, following redirects
-    function request(input, options, callback) {
-      // Parse parameters
-      if (typeof input === "string") {
-        var urlStr = input;
-        try {
-          input = urlToOptions(new URL(urlStr));
-        }
-        catch (err) {
-          /* istanbul ignore next */
-          input = url$1.parse(urlStr);
-        }
-      }
-      else if (URL && (input instanceof URL)) {
-        input = urlToOptions(input);
-      }
-      else {
-        callback = options;
-        options = input;
-        input = { protocol: protocol };
-      }
-      if (typeof options === "function") {
-        callback = options;
-        options = null;
-      }
-
-      // Set defaults
-      options = Object.assign({
-        maxRedirects: exports.maxRedirects,
-        maxBodyLength: exports.maxBodyLength,
-      }, input, options);
-      options.nativeProtocols = nativeProtocols;
-
-      assert.equal(options.protocol, protocol, "protocol mismatch");
-      debug("options", options);
-      return new RedirectableRequest(options, callback);
-    }
-
-    // Executes a GET request, following redirects
-    function get(input, options, callback) {
-      var wrappedRequest = wrappedProtocol.request(input, options, callback);
-      wrappedRequest.end();
-      return wrappedRequest;
-    }
-
-    // Expose the properties on the wrapped protocol
-    Object.defineProperties(wrappedProtocol, {
-      request: { value: request, configurable: true, enumerable: true, writable: true },
-      get: { value: get, configurable: true, enumerable: true, writable: true },
-    });
-  });
-  return exports;
-}
-
-/* istanbul ignore next */
-function noop() { /* empty */ }
-
-// from https://github.com/nodejs/node/blob/master/lib/internal/url.js
-function urlToOptions(urlObject) {
-  var options = {
-    protocol: urlObject.protocol,
-    hostname: urlObject.hostname.startsWith("[") ?
-      /* istanbul ignore next */
-      urlObject.hostname.slice(1, -1) :
-      urlObject.hostname,
-    hash: urlObject.hash,
-    search: urlObject.search,
-    pathname: urlObject.pathname,
-    path: urlObject.pathname + urlObject.search,
-    href: urlObject.href,
-  };
-  if (urlObject.port !== "") {
-    options.port = Number(urlObject.port);
-  }
-  return options;
-}
-
-function removeMatchingHeaders(regex, headers) {
-  var lastValue;
-  for (var header in headers) {
-    if (regex.test(header)) {
-      lastValue = headers[header];
-      delete headers[header];
-    }
-  }
-  return (lastValue === null || typeof lastValue === "undefined") ?
-    undefined : String(lastValue).trim();
-}
-
-function createErrorType(code, defaultMessage) {
-  function CustomError(cause) {
-    Error.captureStackTrace(this, this.constructor);
-    if (!cause) {
-      this.message = defaultMessage;
-    }
-    else {
-      this.message = defaultMessage + ": " + cause.message;
-      this.cause = cause;
-    }
-  }
-  CustomError.prototype = new Error();
-  CustomError.prototype.constructor = CustomError;
-  CustomError.prototype.name = "Error [" + code + "]";
-  CustomError.prototype.code = code;
-  return CustomError;
-}
-
-function abortRequest(request) {
-  for (var e = 0; e < events.length; e++) {
-    request.removeListener(events[e], eventHandlers[events[e]]);
-  }
-  request.on("error", noop);
-  request.abort();
-}
-
-function isSubdomain(subdomain, domain) {
-  const dot = subdomain.length - domain.length - 1;
-  return dot > 0 && subdomain[dot] === "." && subdomain.endsWith(domain);
-}
-
-// Exports
-followRedirects.exports = wrap({ http: http$2, https: https$1 });
-followRedirects.exports.wrap = wrap;
-
-var _from$1 = "axios@^0.21.1";
-var _id$1 = "axios@0.21.4";
-var _inBundle$1 = false;
-var _integrity$1 = "sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==";
-var _location$1 = "/axios";
-var _phantomChildren$1 = {
-};
-var _requested$1 = {
-	type: "range",
-	registry: true,
-	raw: "axios@^0.21.1",
-	name: "axios",
-	escapedName: "axios",
-	rawSpec: "^0.21.1",
-	saveSpec: null,
-	fetchSpec: "^0.21.1"
-};
-var _requiredBy$1 = [
-	"/"
-];
-var _resolved$1 = "https://registry.npmjs.org/axios/-/axios-0.21.4.tgz";
-var _shasum$1 = "c67b90dc0568e5c1cf2b0b858c43ba28e2eda575";
-var _spec$1 = "axios@^0.21.1";
-var _where$1 = "/Users/tianwb/Desktop/workInyjf/yjf-ita";
-var author$1 = {
-	name: "Matt Zabriskie"
-};
-var browser = {
-	"./lib/adapters/http.js": "./lib/adapters/xhr.js"
-};
-var bugs = {
-	url: "https://github.com/axios/axios/issues"
-};
-var bundleDependencies$1 = false;
-var bundlesize = [
-	{
-		path: "./dist/axios.min.js",
-		threshold: "5kB"
-	}
-];
-var dependencies = {
-	"follow-redirects": "^1.14.0"
-};
-var deprecated$1 = false;
-var description$1 = "Promise based HTTP client for the browser and node.js";
-var devDependencies = {
-	coveralls: "^3.0.0",
-	"es6-promise": "^4.2.4",
-	grunt: "^1.3.0",
-	"grunt-banner": "^0.6.0",
-	"grunt-cli": "^1.2.0",
-	"grunt-contrib-clean": "^1.1.0",
-	"grunt-contrib-watch": "^1.0.0",
-	"grunt-eslint": "^23.0.0",
-	"grunt-karma": "^4.0.0",
-	"grunt-mocha-test": "^0.13.3",
-	"grunt-ts": "^6.0.0-beta.19",
-	"grunt-webpack": "^4.0.2",
-	"istanbul-instrumenter-loader": "^1.0.0",
-	"jasmine-core": "^2.4.1",
-	karma: "^6.3.2",
-	"karma-chrome-launcher": "^3.1.0",
-	"karma-firefox-launcher": "^2.1.0",
-	"karma-jasmine": "^1.1.1",
-	"karma-jasmine-ajax": "^0.1.13",
-	"karma-safari-launcher": "^1.0.0",
-	"karma-sauce-launcher": "^4.3.6",
-	"karma-sinon": "^1.0.5",
-	"karma-sourcemap-loader": "^0.3.8",
-	"karma-webpack": "^4.0.2",
-	"load-grunt-tasks": "^3.5.2",
-	minimist: "^1.2.0",
-	mocha: "^8.2.1",
-	sinon: "^4.5.0",
-	"terser-webpack-plugin": "^4.2.3",
-	typescript: "^4.0.5",
-	"url-search-params": "^0.10.0",
-	webpack: "^4.44.2",
-	"webpack-dev-server": "^3.11.0"
-};
-var homepage = "https://axios-http.com";
-var jsdelivr = "dist/axios.min.js";
-var keywords = [
-	"xhr",
-	"http",
-	"ajax",
-	"promise",
-	"node"
-];
-var license$1 = "MIT";
-var main$1 = "index.js";
-var name$1 = "axios";
-var repository = {
-	type: "git",
-	url: "git+https://github.com/axios/axios.git"
-};
-var scripts$1 = {
-	build: "NODE_ENV=production grunt build",
-	coveralls: "cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-	examples: "node ./examples/server.js",
-	fix: "eslint --fix lib/**/*.js",
-	postversion: "git push && git push --tags",
-	preversion: "npm test",
-	start: "node ./sandbox/server.js",
-	test: "grunt test",
-	version: "npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"
-};
-var typings = "./index.d.ts";
-var unpkg = "dist/axios.min.js";
-var version$1 = "0.21.4";
-var require$$0$1 = {
-	_from: _from$1,
-	_id: _id$1,
-	_inBundle: _inBundle$1,
-	_integrity: _integrity$1,
-	_location: _location$1,
-	_phantomChildren: _phantomChildren$1,
-	_requested: _requested$1,
-	_requiredBy: _requiredBy$1,
-	_resolved: _resolved$1,
-	_shasum: _shasum$1,
-	_spec: _spec$1,
-	_where: _where$1,
-	author: author$1,
-	browser: browser,
-	bugs: bugs,
-	bundleDependencies: bundleDependencies$1,
-	bundlesize: bundlesize,
-	dependencies: dependencies,
-	deprecated: deprecated$1,
-	description: description$1,
-	devDependencies: devDependencies,
-	homepage: homepage,
-	jsdelivr: jsdelivr,
-	keywords: keywords,
-	license: license$1,
-	main: main$1,
-	name: name$1,
-	repository: repository,
-	scripts: scripts$1,
-	typings: typings,
-	unpkg: unpkg,
-	version: version$1
-};
-
-var utils$6 = utils$e;
-var settle = settle$2;
-var buildFullPath = buildFullPath$2;
-var buildURL$1 = buildURL$3;
-var http$1 = require$$1;
-var https = require$$2;
-var httpFollow = followRedirects.exports.http;
-var httpsFollow = followRedirects.exports.https;
-var url = require$$0$2;
-var zlib = require$$8;
-var pkg$1 = require$$0$1;
-var createError = createError$3;
-var enhanceError$1 = enhanceError$3;
-
-var isHttps = /https:?/;
-
-/**
- *
- * @param {http.ClientRequestArgs} options
- * @param {AxiosProxyConfig} proxy
- * @param {string} location
- */
-function setProxy(options, proxy, location) {
-  options.hostname = proxy.host;
-  options.host = proxy.host;
-  options.port = proxy.port;
-  options.path = location;
-
-  // Basic proxy authorization
-  if (proxy.auth) {
-    var base64 = Buffer.from(proxy.auth.username + ':' + proxy.auth.password, 'utf8').toString('base64');
-    options.headers['Proxy-Authorization'] = 'Basic ' + base64;
-  }
-
-  // If a proxy is used, any redirects must also pass through the proxy
-  options.beforeRedirect = function beforeRedirect(redirection) {
-    redirection.headers.host = redirection.host;
-    setProxy(redirection, proxy, redirection.href);
-  };
-}
-
-/*eslint consistent-return:0*/
-var http_1 = function httpAdapter(config) {
-  return new Promise(function dispatchHttpRequest(resolvePromise, rejectPromise) {
-    var resolve = function resolve(value) {
-      resolvePromise(value);
-    };
-    var reject = function reject(value) {
-      rejectPromise(value);
-    };
-    var data = config.data;
-    var headers = config.headers;
-
-    // Set User-Agent (required by some servers)
-    // See https://github.com/axios/axios/issues/69
-    if ('User-Agent' in headers || 'user-agent' in headers) {
-      // User-Agent is specified; handle case where no UA header is desired
-      if (!headers['User-Agent'] && !headers['user-agent']) {
-        delete headers['User-Agent'];
-        delete headers['user-agent'];
-      }
-      // Otherwise, use specified value
-    } else {
-      // Only set header if it hasn't been set in config
-      headers['User-Agent'] = 'axios/' + pkg$1.version;
-    }
-
-    if (data && !utils$6.isStream(data)) {
-      if (Buffer.isBuffer(data)) ; else if (utils$6.isArrayBuffer(data)) {
-        data = Buffer.from(new Uint8Array(data));
-      } else if (utils$6.isString(data)) {
-        data = Buffer.from(data, 'utf-8');
-      } else {
-        return reject(createError(
-          'Data after transformation must be a string, an ArrayBuffer, a Buffer, or a Stream',
-          config
-        ));
-      }
-
-      // Add Content-Length header if data exists
-      headers['Content-Length'] = data.length;
-    }
-
-    // HTTP basic authentication
-    var auth = undefined;
-    if (config.auth) {
-      var username = config.auth.username || '';
-      var password = config.auth.password || '';
-      auth = username + ':' + password;
-    }
-
-    // Parse url
-    var fullPath = buildFullPath(config.baseURL, config.url);
-    var parsed = url.parse(fullPath);
-    var protocol = parsed.protocol || 'http:';
-
-    if (!auth && parsed.auth) {
-      var urlAuth = parsed.auth.split(':');
-      var urlUsername = urlAuth[0] || '';
-      var urlPassword = urlAuth[1] || '';
-      auth = urlUsername + ':' + urlPassword;
-    }
-
-    if (auth) {
-      delete headers.Authorization;
-    }
-
-    var isHttpsRequest = isHttps.test(protocol);
-    var agent = isHttpsRequest ? config.httpsAgent : config.httpAgent;
-
-    var options = {
-      path: buildURL$1(parsed.path, config.params, config.paramsSerializer).replace(/^\?/, ''),
-      method: config.method.toUpperCase(),
-      headers: headers,
-      agent: agent,
-      agents: { http: config.httpAgent, https: config.httpsAgent },
-      auth: auth
-    };
-
-    if (config.socketPath) {
-      options.socketPath = config.socketPath;
-    } else {
-      options.hostname = parsed.hostname;
-      options.port = parsed.port;
-    }
-
-    var proxy = config.proxy;
-    if (!proxy && proxy !== false) {
-      var proxyEnv = protocol.slice(0, -1) + '_proxy';
-      var proxyUrl = process.env[proxyEnv] || process.env[proxyEnv.toUpperCase()];
-      if (proxyUrl) {
-        var parsedProxyUrl = url.parse(proxyUrl);
-        var noProxyEnv = process.env.no_proxy || process.env.NO_PROXY;
-        var shouldProxy = true;
-
-        if (noProxyEnv) {
-          var noProxy = noProxyEnv.split(',').map(function trim(s) {
-            return s.trim();
-          });
-
-          shouldProxy = !noProxy.some(function proxyMatch(proxyElement) {
-            if (!proxyElement) {
-              return false;
-            }
-            if (proxyElement === '*') {
-              return true;
-            }
-            if (proxyElement[0] === '.' &&
-                parsed.hostname.substr(parsed.hostname.length - proxyElement.length) === proxyElement) {
-              return true;
-            }
-
-            return parsed.hostname === proxyElement;
-          });
-        }
-
-        if (shouldProxy) {
-          proxy = {
-            host: parsedProxyUrl.hostname,
-            port: parsedProxyUrl.port,
-            protocol: parsedProxyUrl.protocol
-          };
-
-          if (parsedProxyUrl.auth) {
-            var proxyUrlAuth = parsedProxyUrl.auth.split(':');
-            proxy.auth = {
-              username: proxyUrlAuth[0],
-              password: proxyUrlAuth[1]
-            };
-          }
-        }
-      }
-    }
-
-    if (proxy) {
-      options.headers.host = parsed.hostname + (parsed.port ? ':' + parsed.port : '');
-      setProxy(options, proxy, protocol + '//' + parsed.hostname + (parsed.port ? ':' + parsed.port : '') + options.path);
-    }
-
-    var transport;
-    var isHttpsProxy = isHttpsRequest && (proxy ? isHttps.test(proxy.protocol) : true);
-    if (config.transport) {
-      transport = config.transport;
-    } else if (config.maxRedirects === 0) {
-      transport = isHttpsProxy ? https : http$1;
-    } else {
-      if (config.maxRedirects) {
-        options.maxRedirects = config.maxRedirects;
-      }
-      transport = isHttpsProxy ? httpsFollow : httpFollow;
-    }
-
-    if (config.maxBodyLength > -1) {
-      options.maxBodyLength = config.maxBodyLength;
-    }
-
-    // Create the request
-    var req = transport.request(options, function handleResponse(res) {
-      if (req.aborted) return;
-
-      // uncompress the response body transparently if required
-      var stream = res;
-
-      // return the last request in case of redirects
-      var lastRequest = res.req || req;
-
-
-      // if no content, is HEAD request or decompress disabled we should not decompress
-      if (res.statusCode !== 204 && lastRequest.method !== 'HEAD' && config.decompress !== false) {
-        switch (res.headers['content-encoding']) {
-        /*eslint default-case:0*/
-        case 'gzip':
-        case 'compress':
-        case 'deflate':
-        // add the unzipper to the body stream processing pipeline
-          stream = stream.pipe(zlib.createUnzip());
-
-          // remove the content-encoding in order to not confuse downstream operations
-          delete res.headers['content-encoding'];
-          break;
-        }
-      }
-
-      var response = {
-        status: res.statusCode,
-        statusText: res.statusMessage,
-        headers: res.headers,
-        config: config,
-        request: lastRequest
-      };
-
-      if (config.responseType === 'stream') {
-        response.data = stream;
-        settle(resolve, reject, response);
-      } else {
-        var responseBuffer = [];
-        var totalResponseBytes = 0;
-        stream.on('data', function handleStreamData(chunk) {
-          responseBuffer.push(chunk);
-          totalResponseBytes += chunk.length;
-
-          // make sure the content length is not over the maxContentLength if specified
-          if (config.maxContentLength > -1 && totalResponseBytes > config.maxContentLength) {
-            stream.destroy();
-            reject(createError('maxContentLength size of ' + config.maxContentLength + ' exceeded',
-              config, null, lastRequest));
-          }
-        });
-
-        stream.on('error', function handleStreamError(err) {
-          if (req.aborted) return;
-          reject(enhanceError$1(err, config, null, lastRequest));
-        });
-
-        stream.on('end', function handleStreamEnd() {
-          var responseData = Buffer.concat(responseBuffer);
-          if (config.responseType !== 'arraybuffer') {
-            responseData = responseData.toString(config.responseEncoding);
-            if (!config.responseEncoding || config.responseEncoding === 'utf8') {
-              responseData = utils$6.stripBOM(responseData);
-            }
-          }
-
-          response.data = responseData;
-          settle(resolve, reject, response);
-        });
-      }
-    });
-
-    // Handle errors
-    req.on('error', function handleRequestError(err) {
-      if (req.aborted && err.code !== 'ERR_FR_TOO_MANY_REDIRECTS') return;
-      reject(enhanceError$1(err, config, null, req));
-    });
-
-    // Handle request timeout
-    if (config.timeout) {
-      // This is forcing a int timeout to avoid problems if the `req` interface doesn't handle other types.
-      var timeout = parseInt(config.timeout, 10);
-
-      if (isNaN(timeout)) {
-        reject(createError(
-          'error trying to parse `config.timeout` to int',
-          config,
-          'ERR_PARSE_TIMEOUT',
-          req
-        ));
-
-        return;
-      }
-
-      // Sometime, the response will be very slow, and does not respond, the connect event will be block by event loop system.
-      // And timer callback will be fired, and abort() will be invoked before connection, then get "socket hang up" and code ECONNRESET.
-      // At this time, if we have a large number of request, nodejs will hang up some socket on background. and the number will up and up.
-      // And then these socket which be hang up will devoring CPU little by little.
-      // ClientRequest.setTimeout will be fired on the specify milliseconds, and can make sure that abort() will be fired after connect.
-      req.setTimeout(timeout, function handleRequestTimeout() {
-        req.abort();
-        reject(createError(
-          'timeout of ' + timeout + 'ms exceeded',
-          config,
-          config.transitional && config.transitional.clarifyTimeoutError ? 'ETIMEDOUT' : 'ECONNABORTED',
-          req
-        ));
-      });
-    }
-
-    if (config.cancelToken) {
-      // Handle cancellation
-      config.cancelToken.promise.then(function onCanceled(cancel) {
-        if (req.aborted) return;
-
-        req.abort();
-        reject(cancel);
-      });
-    }
-
-    // Send the request
-    if (utils$6.isStream(data)) {
-      data.on('error', function handleStreamError(err) {
-        reject(enhanceError$1(err, config, null, req));
-      }).pipe(req);
-    } else {
-      req.end(data);
-    }
-  });
-};
-
-var utils$5 = utils$e;
+var utils$5 = utils$d;
 var normalizeHeaderName = normalizeHeaderName$1;
-var enhanceError = enhanceError$3;
+var enhanceError = enhanceError$2;
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -2077,7 +1029,7 @@ function getDefaultAdapter() {
     adapter = xhr;
   } else if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
     // For node use HTTP adapter
-    adapter = http_1;
+    adapter = xhr;
   }
   return adapter;
 }
@@ -2189,7 +1141,7 @@ utils$5.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method)
 
 var defaults_1 = defaults$3;
 
-var utils$4 = utils$e;
+var utils$4 = utils$d;
 var defaults$2 = defaults_1;
 
 /**
@@ -2214,7 +1166,7 @@ var isCancel$1 = function isCancel(value) {
   return !!(value && value.__CANCEL__);
 };
 
-var utils$3 = utils$e;
+var utils$3 = utils$d;
 var transformData = transformData$1;
 var isCancel = isCancel$1;
 var defaults$1 = defaults_1;
@@ -2295,7 +1247,7 @@ var dispatchRequest$1 = function dispatchRequest(config) {
   });
 };
 
-var utils$2 = utils$e;
+var utils$2 = utils$d;
 
 /**
  * Config-specific merge-function which creates a new config-object
@@ -2379,6 +1331,115 @@ var mergeConfig$2 = function mergeConfig(config1, config2) {
   utils$2.forEach(otherKeys, mergeDeepProperties);
 
   return config;
+};
+
+var name$1 = "axios";
+var version$1 = "0.21.4";
+var description$1 = "Promise based HTTP client for the browser and node.js";
+var main$1 = "index.js";
+var scripts$1 = {
+	test: "grunt test",
+	start: "node ./sandbox/server.js",
+	build: "NODE_ENV=production grunt build",
+	preversion: "npm test",
+	version: "npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json",
+	postversion: "git push && git push --tags",
+	examples: "node ./examples/server.js",
+	coveralls: "cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+	fix: "eslint --fix lib/**/*.js"
+};
+var repository = {
+	type: "git",
+	url: "https://github.com/axios/axios.git"
+};
+var keywords = [
+	"xhr",
+	"http",
+	"ajax",
+	"promise",
+	"node"
+];
+var author$1 = "Matt Zabriskie";
+var license$1 = "MIT";
+var bugs = {
+	url: "https://github.com/axios/axios/issues"
+};
+var homepage = "https://axios-http.com";
+var devDependencies = {
+	coveralls: "^3.0.0",
+	"es6-promise": "^4.2.4",
+	grunt: "^1.3.0",
+	"grunt-banner": "^0.6.0",
+	"grunt-cli": "^1.2.0",
+	"grunt-contrib-clean": "^1.1.0",
+	"grunt-contrib-watch": "^1.0.0",
+	"grunt-eslint": "^23.0.0",
+	"grunt-karma": "^4.0.0",
+	"grunt-mocha-test": "^0.13.3",
+	"grunt-ts": "^6.0.0-beta.19",
+	"grunt-webpack": "^4.0.2",
+	"istanbul-instrumenter-loader": "^1.0.0",
+	"jasmine-core": "^2.4.1",
+	karma: "^6.3.2",
+	"karma-chrome-launcher": "^3.1.0",
+	"karma-firefox-launcher": "^2.1.0",
+	"karma-jasmine": "^1.1.1",
+	"karma-jasmine-ajax": "^0.1.13",
+	"karma-safari-launcher": "^1.0.0",
+	"karma-sauce-launcher": "^4.3.6",
+	"karma-sinon": "^1.0.5",
+	"karma-sourcemap-loader": "^0.3.8",
+	"karma-webpack": "^4.0.2",
+	"load-grunt-tasks": "^3.5.2",
+	minimist: "^1.2.0",
+	mocha: "^8.2.1",
+	sinon: "^4.5.0",
+	"terser-webpack-plugin": "^4.2.3",
+	typescript: "^4.0.5",
+	"url-search-params": "^0.10.0",
+	webpack: "^4.44.2",
+	"webpack-dev-server": "^3.11.0"
+};
+var browser = {
+	"./lib/adapters/http.js": "./lib/adapters/xhr.js"
+};
+var jsdelivr = "dist/axios.min.js";
+var unpkg = "dist/axios.min.js";
+var typings = "./index.d.ts";
+var dependencies = {
+	"follow-redirects": "^1.14.0"
+};
+var bundlesize = [
+	{
+		path: "./dist/axios.min.js",
+		threshold: "5kB"
+	}
+];
+var __npminstall_done$1 = "Mon Apr 18 2022 21:42:08 GMT+0800 (GMT+08:00)";
+var _from$1 = "axios@0.21.4";
+var _resolved$1 = "https://registry.npmmirror.com/axios/-/axios-0.21.4.tgz";
+var require$$0$1 = {
+	name: name$1,
+	version: version$1,
+	description: description$1,
+	main: main$1,
+	scripts: scripts$1,
+	repository: repository,
+	keywords: keywords,
+	author: author$1,
+	license: license$1,
+	bugs: bugs,
+	homepage: homepage,
+	devDependencies: devDependencies,
+	browser: browser,
+	jsdelivr: jsdelivr,
+	unpkg: unpkg,
+	typings: typings,
+	dependencies: dependencies,
+	bundlesize: bundlesize,
+	__npminstall_done: __npminstall_done$1,
+	_from: _from$1,
+	_resolved: _resolved$1
 };
 
 var pkg = require$$0$1;
@@ -2485,8 +1546,8 @@ var validator$1 = {
   validators: validators$1
 };
 
-var utils$1 = utils$e;
-var buildURL = buildURL$3;
+var utils$1 = utils$d;
+var buildURL = buildURL$2;
 var InterceptorManager = InterceptorManager_1;
 var dispatchRequest = dispatchRequest$1;
 var mergeConfig$1 = mergeConfig$2;
@@ -2742,7 +1803,7 @@ var isAxiosError = function isAxiosError(payload) {
   return (typeof payload === 'object') && (payload.isAxiosError === true);
 };
 
-var utils = utils$e;
+var utils = utils$d;
 var bind = bind$2;
 var Axios = Axios_1;
 var mergeConfig = mergeConfig$2;
@@ -2768,105 +1829,70 @@ function createInstance(defaultConfig) {
 }
 
 // Create the default instance to be exported
-var axios$1 = createInstance(defaults);
+var axios = createInstance(defaults);
 
 // Expose Axios class to allow class inheritance
-axios$1.Axios = Axios;
+axios.Axios = Axios;
 
 // Factory for creating new instances
-axios$1.create = function create(instanceConfig) {
-  return createInstance(mergeConfig(axios$1.defaults, instanceConfig));
+axios.create = function create(instanceConfig) {
+  return createInstance(mergeConfig(axios.defaults, instanceConfig));
 };
 
 // Expose Cancel & CancelToken
-axios$1.Cancel = Cancel_1;
-axios$1.CancelToken = CancelToken_1;
-axios$1.isCancel = isCancel$1;
+axios.Cancel = Cancel_1;
+axios.CancelToken = CancelToken_1;
+axios.isCancel = isCancel$1;
 
 // Expose all/spread
-axios$1.all = function all(promises) {
+axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios$1.spread = spread;
+axios.spread = spread;
 
 // Expose isAxiosError
-axios$1.isAxiosError = isAxiosError;
+axios.isAxiosError = isAxiosError;
 
-axios$2.exports = axios$1;
+axios$1.exports = axios;
 
 // Allow use of default import syntax in TypeScript
-axios$2.exports.default = axios$1;
+axios$1.exports.default = axios;
 
-var axios = axios$2.exports;
+var _axios_0_21_4_axios = axios$1.exports;
 
 var mpCloudSdk = {exports: {}};
 
-var _from = "@tbmp/mp-cloud-sdk@^1.4.2";
-var _id = "@tbmp/mp-cloud-sdk@1.5.4";
-var _inBundle = false;
-var _integrity = "sha512-GZJhTj5GWK5cCGvy+rOWgQSBxtXccO98TvAC4x7lluWFLyEXxPP4SH1YDFW6MZpbPVSXB6xVBVwWrs15842Emw==";
-var _location = "/@tbmp/mp-cloud-sdk";
-var _phantomChildren = {
-};
-var _requested = {
-	type: "range",
-	registry: true,
-	raw: "@tbmp/mp-cloud-sdk@^1.4.2",
-	name: "@tbmp/mp-cloud-sdk",
-	escapedName: "@tbmp%2fmp-cloud-sdk",
-	scope: "@tbmp",
-	rawSpec: "^1.4.2",
-	saveSpec: null,
-	fetchSpec: "^1.4.2"
-};
-var _requiredBy = [
-	"/"
-];
-var _resolved = "https://registry.npmjs.org/@tbmp/mp-cloud-sdk/-/mp-cloud-sdk-1.5.4.tgz";
-var _shasum = "8e385e061aba2acfbd1c6e658f391b7878a03f28";
-var _spec = "@tbmp/mp-cloud-sdk@^1.4.2";
-var _where = "/Users/tianwb/Desktop/workInyjf/yjf-ita";
-var author = "";
-var bundleDependencies = false;
-var deprecated = false;
-var description = "";
-var gitHead = "d383321e8319c91defa380a232d5a5997cc44030";
-var license = "ISC";
-var main = "index.js";
 var name = "@tbmp/mp-cloud-sdk";
-var publishConfig = {
-	access: "public"
-};
+var version = "1.5.4";
+var description = "";
+var main = "index.js";
+var types = "./types/platforms/mp/index.d.ts";
 var scripts = {
 	test: "echo \"Error: no test specified\" && exit 1"
 };
-var types = "./types/platforms/mp/index.d.ts";
-var version = "1.5.4";
+var author = "";
+var license = "ISC";
+var publishConfig = {
+	access: "public"
+};
+var gitHead = "d383321e8319c91defa380a232d5a5997cc44030";
+var __npminstall_done = "Mon Apr 18 2022 21:42:08 GMT+0800 (GMT+08:00)";
+var _from = "@tbmp/mp-cloud-sdk@1.5.4";
+var _resolved = "https://registry.npmmirror.com/@tbmp/mp-cloud-sdk/-/mp-cloud-sdk-1.5.4.tgz";
 var require$$0 = {
-	_from: _from,
-	_id: _id,
-	_inBundle: _inBundle,
-	_integrity: _integrity,
-	_location: _location,
-	_phantomChildren: _phantomChildren,
-	_requested: _requested,
-	_requiredBy: _requiredBy,
-	_resolved: _resolved,
-	_shasum: _shasum,
-	_spec: _spec,
-	_where: _where,
-	author: author,
-	bundleDependencies: bundleDependencies,
-	deprecated: deprecated,
-	description: description,
-	gitHead: gitHead,
-	license: license,
-	main: main,
 	name: name,
-	publishConfig: publishConfig,
-	scripts: scripts,
+	version: version,
+	description: description,
+	main: main,
 	types: types,
-	version: version
+	scripts: scripts,
+	author: author,
+	license: license,
+	publishConfig: publishConfig,
+	gitHead: gitHead,
+	__npminstall_done: __npminstall_done,
+	_from: _from,
+	_resolved: _resolved
 };
 
 (function (module, exports) {
@@ -2881,40 +1907,34 @@ var cloud = /*@__PURE__*/getDefaultExportFromCjs(mpCloudSdk.exports);
  * @param url 请求地址
  * @param data 请求数据
  */
-async function httpRequest(method, url, data = {}) {
-    console.log(data, 'dataPoint');
-    cloud.init({ env: data.is_prod ? 'online' : 'test' });
-    try {
-        const _data = {};
-        const _params = {
-            ...data,
-        };
-        if (method == "GET") {
+function httpRequest(method, url, data = {}) {
+    return __awaiter(this, void 0, void 0, function* () {
+        console.log(data, 'dataPoint');
+        cloud.init({ env: data.is_prod ? 'online' : 'test' });
+        try {
+            const _data = {};
+            const _params = Object.assign({}, data);
+            if (method == "GET") {
+            }
+            else {
+                _data.body = _params;
+            }
+            let result = {};
+            result = yield cloud.application.httpRequest(Object.assign({ path: url, method: method, headers: { "Content-Type": "application/json" }, exts: {
+                    timeout: 10000,
+                    //cloudAppId: 7606
+                    //cloudAppId: 31017
+                    cloudAppId: 34134
+                } }, _data));
+            return result.data || result;
         }
-        else {
-            _data.body = _params;
+        catch (err) {
+            if (JSON.stringify(err).indexOf("mtop请求错误") >= 0) {
+                throw { msg: "当前网络异常" };
+            }
+            throw (err || { msg: "服务器异常" });
         }
-        let result = {};
-        result = await cloud.application.httpRequest({
-            path: url,
-            method: method,
-            headers: { "Content-Type": "application/json" },
-            exts: {
-                timeout: 10000,
-                //cloudAppId: 7606
-                //cloudAppId: 31017
-                cloudAppId: 34134
-            },
-            ..._data,
-        });
-        return result.data || result;
-    }
-    catch (err) {
-        if (JSON.stringify(err).indexOf("mtop请求错误") >= 0) {
-            throw { msg: "当前网络异常" };
-        }
-        throw (err || { msg: "服务器异常" });
-    }
+    });
 }
 function get(url, data = {}) {
     return httpRequest("GET", url, data);
@@ -2980,7 +2000,7 @@ const host_test = "https://test-open-gateway.enbrands.com/receive/addReceive";
 const keys = [
     'is_prod',
     'runtime_env',
-    // 事件
+    // 事件2
     // 'event_uuid', // event_uuid，server_time这两个前端不用传，由filebeat提供的
     'event_time',
     'event_name',
@@ -2996,7 +2016,7 @@ const keys = [
     'act_id',
     'is_interactive',
     'url',
-    // 应用
+    // 应用1
     'platform_system',
     'platform_app',
     'platform_app_code',
@@ -3034,15 +2054,17 @@ const keys = [
     'city',
     'district',
 ];
-// ceshi1111
 class BuriedPoint {
-    defaultSetting = {}; // 最终完成喂点传递参数
-    isPosition = false;
-    host = host;
-    host_test = host_test;
-    lat = '';
-    lon = '';
-    storageList = [];
+    constructor() {
+        this.isProd = false;
+        this.defaultSetting = {}; // 最终完成喂点传递参数
+        this.isPosition = false;
+        this.host = host;
+        this.host_test = host_test;
+        this.lat = '';
+        this.lon = '';
+        this.storageList = [];
+    }
     setConfig(config, next) {
         this.defaultSetting = config;
         if (config.runtime_env === 'h5' || config.runtime_env === 'pc') {
@@ -3053,11 +2075,8 @@ class BuriedPoint {
         next && next(); // 初始化结束之后去完成喂点等
     }
     setAsyncConfig(config, next) {
-        this.defaultSetting = {
-            ...this.defaultSetting,
-            ...config
-        };
-        next?.();
+        this.defaultSetting = Object.assign(Object.assign({}, this.defaultSetting), config);
+        next === null || next === void 0 ? void 0 : next();
     }
     defaultSettingCheck() {
         const { defaultSetting } = this;
@@ -3164,31 +2183,34 @@ class BuriedPoint {
         }
         return true;
     }
-    async doFed(config) {
-        if (config.runtime_env === 'h5' || config.runtime_env === 'pc') {
-            if (config.is_prod) {
-                return axios.post(this.host, config);
+    getData1() {
+        console.log('chuanchu');
+    }
+    doFed(config) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (config.runtime_env === 'h5' || config.runtime_env === 'pc') {
+                if (config.is_prod) {
+                    return _axios_0_21_4_axios.post(this.host, config);
+                }
+                else {
+                    return _axios_0_21_4_axios.post(this.host_test, config);
+                }
             }
-            else {
-                return axios.post(this.host_test, config);
+            if (config.runtime_env === 'alipay') {
+                return http.post("/receive/addReceive", Object.assign({}, config));
             }
-        }
-        if (config.runtime_env === 'alipay') {
-            return http.post("/receive/addReceive", {
-                ...config
-            });
-        }
-        /* if (config.is_prod) {
-            this.request({
-                url: this.host,
-                data: config
-            })
-        } else {
-            this.request({
-                url: this.host_test,
-                data: config
-            })
-        } */
+            /* if (config.is_prod) {
+                this.request({
+                    url: this.host,
+                    data: config
+                })
+            } else {
+                this.request({
+                    url: this.host_test,
+                    data: config
+                })
+            } */
+        });
     }
     get_event_time() {
         return +new Date();
@@ -3230,22 +2252,24 @@ class BuriedPoint {
         console.log('params', params);
         return params;
     }
-    async fed(obj) {
-        const result = this.defaultSettingCheck();
-        const eventParamsResult = this.eventParamsCheck(obj);
-        obj.event_time = this.get_event_time();
-        this.storageList.push(obj);
-        if (result && eventParamsResult) {
-            this.storageList.map(async (storage) => {
-                return this.doFed(this.getFedParams(storage));
-            });
-            //return OmegaLogger.prototype.fed.call(this, obj);
-            this.storageList = [];
-        }
-        if (!result) {
+    fed(obj) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = this.defaultSettingCheck();
+            const eventParamsResult = this.eventParamsCheck(obj);
+            obj.event_time = this.get_event_time();
             this.storageList.push(obj);
-            this.storageList.length > 100 && console.warn(`当下埋点异常，参数校验不通过，已累计异常埋点${this.storageList.length}条`);
-        }
+            if (result && eventParamsResult) {
+                this.storageList.map((storage) => __awaiter(this, void 0, void 0, function* () {
+                    return this.doFed(this.getFedParams(storage));
+                }));
+                //return OmegaLogger.prototype.fed.call(this, obj);
+                this.storageList = [];
+            }
+            if (!result) {
+                this.storageList.push(obj);
+                this.storageList.length > 100 && console.warn(`当下埋点异常，参数校验不通过，已累计异常埋点${this.storageList.length}条`);
+            }
+        });
     }
     // 是否开启定位
     setPosition(flag) {
@@ -3259,5 +2283,6 @@ class BuriedPoint {
         console.info('纬度:' + lat + ',经度:' + lon);
     }
 }
+const buriedpointH5 = new BuriedPoint;
 
-export { BuriedPoint as default };
+export { buriedpointH5 as default };

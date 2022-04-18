@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-      "target": "esnext",
+      "target": "ES6",
       "module": "ESNext",
       "strict": true,
       "jsx": "preserve",
@@ -10,10 +10,10 @@
       "esModuleInterop": true,
       "allowSyntheticDefaultImports": true,
       "sourceMap": true,
+      "declaration": true, // 生成定义文件
       "baseUrl": ".",
       "types": [
-       
-        
+        "node"
       ],
       "paths": {
         "@/*": [

@@ -118,6 +118,7 @@ import {EVENT_PARAMS} from "./dataTypes/types.EVENT_PARAMS"
 import axios from 'axios';
 import http from "./http"
 class BuriedPoint{
+    public isProd:boolean=false;
     public defaultSetting: Record<string, any> = {};  // 最终完成喂点传递参数
     public isPosition:boolean=false; 
     public host: string = host;
@@ -261,6 +262,9 @@ class BuriedPoint{
         }
         return true
     }
+    public getData1(){
+        console.log('chuanchu')
+    }
     public async doFed(config: FED_PARAMS): Promise<any> {
         if (config.runtime_env === 'h5' || config.runtime_env === 'pc') {
             if (config.is_prod) {
@@ -355,4 +359,5 @@ class BuriedPoint{
     }
     
 }
-export default BuriedPoint;
+const buriedpointH5 = new BuriedPoint;
+export default buriedpointH5;
