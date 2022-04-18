@@ -15,7 +15,7 @@ jobs:
     - uses: actions/setup-node@v2
       with:
         node-version: 14
-    - run: cnpm install
+    - run: npm install
     - run: node -v
     - run: npm run build
 
