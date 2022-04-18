@@ -52,7 +52,7 @@ const host_impAna = "https://test-hd-analyse.enbrands.com/applet/reportAct";
 const keys = [
     'is_prod', // 是否生产环境
     'runtime_env',
-    // 事件
+    // 事件2
     // 'event_uuid', // event_uuid，server_time这两个前端不用传，由filebeat提供的
     'event_time',
     'event_name',
