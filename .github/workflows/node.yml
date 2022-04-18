@@ -16,7 +16,7 @@ jobs:
       with:
         node-version: 14
     - run: npm install
-    - run: node fund
+    - run: node found
     - run: npm run build
 
  publish-npm:
