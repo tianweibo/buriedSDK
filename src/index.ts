@@ -117,7 +117,7 @@ import { FED_PARAMS } from "./dataTypes/types.FED_PARAMS";
 import {EVENT_PARAMS} from "./dataTypes/types.EVENT_PARAMS"
 import axios from 'axios';
 import http from "./http"
-// ceshi11112222223343222221
+// ceshi111122222233432222212
 class BuriedPoint{
     public defaultSetting: Record<string, any> = {};  // 最终完成喂点传递参数
     public isPosition:boolean=false; 
